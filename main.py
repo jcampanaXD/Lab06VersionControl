@@ -10,11 +10,15 @@ def encoder(password):
 
 
 def decoder(encoded_pw):
-    decoded_pw = ""
-    # iterate through encoded pw, subrtacting 3 from each
-    for i in encoded_pw:
-        subtracted = str((int(i) - 3))
-        decoded_pw += subtracted
+    encoded_pw = [int(num) for num in list(encoded_pw)]  # password into integer list
+    for idx, num in enumerate(encoded_pw):
+        decoded_num = encoded_pw[idx] - 3
+        if decoded_num < 0:
+            remainder = 10 + decoded_num  # takes amount below 0
+            encoded_pw[idx] = remainder  # replaces value out of range, with new in value range
+        else:
+            encoded_pw[idx] -= 3
+    decoded_pw = ''.join([str(num) for num in encoded_pw])  # decoded password put back into string
     return decoded_pw
 
 
@@ -33,7 +37,7 @@ def main():
             # encode
             print("Your password has been encoded and stored!")
         elif opt == 2:
-            # decode
+            encoded_pw = input('Please enter your password to decode: ')
             decoded_pw = decoder(encoded_pw)
             print(f"The encoded password is {encoded_pw}, and the original password is {decoded_pw}.")
         elif opt == 3:
