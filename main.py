@@ -1,8 +1,9 @@
+# Joelie Campana and Hunter Stewart
 def encoder(password):
     encoded_pw = ""
     # iterate though password, adding 3 to each
     for i in password:
-        added = str((int(i) + 3))
+        added = str((int(i) + 3) % 10)
         # append to string
         encoded_pw += added
     # return string
@@ -37,7 +38,6 @@ def main():
             # encode
             print("Your password has been encoded and stored!")
         elif opt == 2:
-            encoded_pw = input('Please enter your password to decode: ')
             decoded_pw = decoder(encoded_pw)
             print(f"The encoded password is {encoded_pw}, and the original password is {decoded_pw}.")
         elif opt == 3:
